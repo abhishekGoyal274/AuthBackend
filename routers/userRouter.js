@@ -6,10 +6,11 @@ const { application } = require("express");
 
 //register
 router.post("/", async (req, res) => {
+    console.log("here");
     try {
 
         const { email, password, passwordVerify } = req.body;
-        console.log(email, password, passwordVerify);
+        // console.log(email, password, passwordVerify);
 
         //Validation
         if (!email || !password || !passwordVerify)
@@ -41,7 +42,8 @@ router.post("/", async (req, res) => {
 
         //Login the user
         const token = jwt.sign({ user: createdUser._id }, process.env.JWT_SECRET)
-        console.log(token);
+        // console.log(token);
+
 
         // Response
         res.cookie("token", token, {
@@ -72,6 +74,7 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ errorMessage: "Invalid Credentials" });
 
         const token = jwt.sign({ user: userExist._id }, process.env.JWT_SECRET);
+        console.log(token);
         res.cookie("token", token, {
             httpOnly: true,
         }).send()
@@ -100,6 +103,18 @@ router.get("*", (req, res) => {
 })
 router.post("*", (req, res) => {
     res.status(400).json({ errorMessage: "No such route." });
+})
+
+router.get("/loggedIn", (req, res) => {
+    try {
+        if (!req.cookies.token) return res.json(false);
+        jwt.verify(req.cookies.token, process.env.JWT_SECRET)
+        res.json(true);
+    } catch (err) {
+        console.log(err);
+        return res.json(false);
+    }
+
 })
 
 module.exports = router;
