@@ -5,7 +5,7 @@ const auth = require("../middleware/auth")
 
 router.post("/", auth, async (req, res) => {
     try {
-
+        if(!req.body.name) return res.json({errorMessage: "Enter customer name"})
         const user = await User.findOne({ _id: req.userId })
         const newCustomer = new Customer({
             name: req.body.name,
@@ -22,7 +22,7 @@ router.post("/", auth, async (req, res) => {
 router.get("/", auth, async (req, res) => {
     try {
         const customer = await Customer.find();
-        console.log(customer);
+        // console.log(customer);
         res.json(customer);
     } catch (err) {
         console.log(err);
