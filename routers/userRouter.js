@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
     // console.log("here");
     try {
 
-        const { email, password, passwordVerify } = req.body;
+        let { email, password, passwordVerify } = req.body;
         // console.log(email, password, passwordVerify);
 
         //Validation
@@ -62,7 +62,7 @@ router.post("/", async (req, res) => {
 //login
 router.post("/login", async (req, res) => {
     try {
-        const { email, password } = req.body;
+        let { email, password } = req.body;
         if (!email || !password)
             return res.status(400).json({ errorMessage: "Please enter both, email and password." });
 
