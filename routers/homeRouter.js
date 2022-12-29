@@ -6,7 +6,7 @@ var ApiHomeHTML = '\
         <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">\
         <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">\
         <link rel="icon" type="image/x-icon" href="https://cdn.pixabay.com/photo/2020/07/01/12/58/icon-5359553_1280.png">\
-        <title>API PuMeet</title>\
+        <title>API Autth&Login</title>\
             <body style="background-color:black; margin:0px; padding:0px; font-family: Josefin Sans, sans-serif;;\">\
                 <div style="display: flex;\
                     justify-content: center;\
