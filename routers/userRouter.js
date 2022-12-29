@@ -15,6 +15,8 @@ router.post("/", async (req, res) => {
         //Validation
         if (!email || !password || !passwordVerify)
             return res.status(400).json({ errorMessage: "Please enter all fields" });
+        email = email.toLowerCase();
+
         if (password.lenght < 8)
             return res
                 .status(400)
@@ -64,6 +66,7 @@ router.post("/login", async (req, res) => {
         if (!email || !password)
             return res.status(400).json({ errorMessage: "Please enter both, email and password." });
 
+        email = email.toLowerCase();
         const userExist = await User.findOne({ email });
         if (!userExist)
             return res.status(401).json({ errorMessage: "No Account related to this email." });
@@ -100,7 +103,7 @@ router.get("/logout", (req, res) => {
 
 router.get("/loggedIn", async (req, res) => {
     try {
-        if (!req.cookies.token) return res.json(false); 
+        if (!req.cookies.token) return res.json(false);
         jwt.verify(req.cookies.token, process.env.JWT_SECRET)
         // console.log(req.cookies.token);
         return res.json(true);
